@@ -1,794 +1,332 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Primesjobs — Global Recruitment & Career Portal</title>
-  <meta name="description" content="Premium recruitment landing page for overseas jobs with WhatsApp submission, UPI payment flow, QR code, live openings, testimonials and recruiter contact." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <title>Primesjobs Demo - Pay First</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
-    :root{
-      --bg:#f7f4ee;--surface:#ffffff;--surface-2:#f3eee6;--surface-3:#ece5da;--text:#1b2230;--muted:#667085;
-      --navy:#0d2140;--navy-2:#17345e;--gold:#c8922a;--gold-2:#e9b34a;--line:#ddd4c6;--success:#177245;--danger:#a43030;
-      --shadow-sm:0 6px 20px rgba(10,22,41,.06);--shadow-md:0 18px 50px rgba(10,22,41,.1);--shadow-lg:0 28px 80px rgba(10,22,41,.16);
-      --radius-sm:12px;--radius-md:18px;--radius-lg:26px;
-      --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;--space-8:32px;--space-10:40px;--space-12:48px;--space-16:64px;--space-20:80px;
-    }
-    [data-theme="dark"]{
-      --bg:#151515;--surface:#1d1c1a;--surface-2:#23211f;--surface-3:#2a2723;--text:#eee9e1;--muted:#b1aca3;
-      --navy:#d8a948;--navy-2:#f0c46e;--gold:#d8a948;--gold-2:#f4c96f;--line:#3b3833;--success:#64b98a;--danger:#e18888;
-      --shadow-sm:0 6px 20px rgba(0,0,0,.25);--shadow-md:0 18px 50px rgba(0,0,0,.34);--shadow-lg:0 28px 80px rgba(0,0,0,.45);
-    }
     *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
-    img,svg{display:block;max-width:100%}
-    a{text-decoration:none;color:inherit}
-    input,button,select,textarea{font:inherit;color:inherit}
-    button{cursor:pointer}
-    .skip-link{position:absolute;left:-9999px;top:10px;background:var(--surface);padding:10px 14px;border-radius:10px;border:1px solid var(--line)}
-    .skip-link:focus{left:10px;z-index:9999}
-    .container{width:min(1180px,calc(100% - 40px));margin:0 auto}
-    .section{padding:clamp(64px,8vw,110px) 0}
-    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid rgba(233,179,74,.28);background:rgba(233,179,74,.12);color:var(--gold-2);font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
-    .section-head{max-width:740px;margin-bottom:34px}
-    .section-head h2{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,52px);line-height:1.1;color:var(--navy);margin:14px 0 14px}
-    [data-theme="dark"] .section-head h2{color:var(--gold-2)}
-    .section-head p{color:var(--muted);font-size:17px}
-
-    header{position:sticky;top:0;z-index:200;background:rgba(13,33,64,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(233,179,74,.15)}
-    [data-theme="dark"] header{background:rgba(18,18,18,.94)}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0;gap:16px}
-    .brand{display:flex;align-items:center;gap:12px;color:#fff}
-    .brand svg{width:42px;height:42px;color:var(--gold-2)}
-    .brand-text{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;letter-spacing:-.03em}
-    .brand-text span{color:var(--gold-2)}
-    .nav-links{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-    .nav-links a,.nav-links button{padding:11px 16px;border-radius:999px;font-size:14px;font-weight:600;border:none}
-    .nav-links a{color:rgba(255,255,255,.78)}
-    .nav-links a:hover{background:rgba(255,255,255,.08);color:#fff}
-    .theme-btn{background:rgba(255,255,255,.08);color:#fff}
-    .cta-btn{background:var(--gold);color:#fff;box-shadow:0 12px 30px rgba(201,146,42,.26)}
-
-    .hero{position:relative;isolation:isolate;min-height:100vh;display:flex;align-items:center;background:var(--navy);color:#fff}
-    .hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,33,64,.96),rgba(23,52,94,.86)),url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;z-index:-2}
-    .hero::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 75% 30%, rgba(233,179,74,.18), transparent 30%),radial-gradient(circle at 15% 80%, rgba(255,255,255,.08), transparent 24%);z-index:-1}
-    .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:34px;align-items:center;padding:110px 0 70px}
-    .hero-copy h1{font-family:'Playfair Display',serif;font-size:clamp(44px,6vw,80px);line-height:1.02;letter-spacing:-.03em;margin:18px 0}
-    .hero-copy h1 em{font-style:normal;color:var(--gold-2)}
-    .hero-copy p{font-size:18px;color:rgba(255,255,255,.78);max-width:58ch}
-    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
-    .btn-main,.btn-ghost,.btn-soft{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 24px;border-radius:999px;font-weight:700;min-height:52px}
-    .btn-main{background:var(--gold);color:#fff;border:none}
-    .btn-main:hover{background:var(--gold-2)}
-    .btn-ghost{border:1px solid rgba(255,255,255,.3);color:#fff}
-    .btn-ghost:hover{background:rgba(255,255,255,.08)}
-    .btn-soft{background:var(--surface-2);color:var(--navy);border:none}
-    .hero-panel{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(16px);padding:28px;border-radius:28px;box-shadow:var(--shadow-lg)}
-    .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
-    .hero-stat{padding:18px;border-radius:18px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08)}
-    .hero-stat strong{display:block;font-family:'Playfair Display',serif;font-size:32px;color:var(--gold-2);line-height:1}
-    .hero-stat span{font-size:12px;color:rgba(255,255,255,.68);margin-top:6px;display:block}
-    .trust-list{display:grid;gap:12px;margin-top:10px}
-    .trust-list li{list-style:none;display:flex;gap:12px;align-items:flex-start;color:rgba(255,255,255,.88)}
-
-    .partners{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden}
-    .ticker{display:flex;gap:0;width:max-content;animation:ticker 24s linear infinite}
-    .ticker-item{padding:18px 38px;color:var(--navy);font-weight:700;white-space:nowrap;text-transform:uppercase;font-size:13px;letter-spacing:.14em;display:flex;align-items:center;gap:10px}
-    [data-theme="dark"] .ticker-item{color:var(--gold-2)}
-    .dot{width:6px;height:6px;border-radius:50%;background:var(--gold)}
-    @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-    .about-grid,.steps-grid,.register-grid,.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center}
-    .image-card{position:relative;border-radius:28px;overflow:hidden;box-shadow:var(--shadow-lg);min-height:520px}
-    .image-card img{width:100%;height:100%;object-fit:cover}
-    .floating-badge{position:absolute;right:24px;bottom:24px;padding:22px 24px;border-radius:20px;background:var(--gold);color:#fff;box-shadow:0 18px 40px rgba(201,146,42,.35)}
-    .floating-badge strong{display:block;font-family:'Playfair Display',serif;font-size:42px;line-height:1}
-    .about-copy p{color:var(--muted);margin-top:14px;font-size:16px}
-    .feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:26px}
-    .feature-card,.industry-card,.job-card,.story-card,.country-card,.contact-card,.pay-box,.summary-box,.register-form,.process-box{background:var(--surface);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow-sm)}
-    .feature-card{padding:18px}
-    .feature-card h3{font-size:15px;color:var(--navy);margin-bottom:6px}
-    [data-theme="dark"] .feature-card h3,[data-theme="dark"] .job-card h3,[data-theme="dark"] .industry-card h3,[data-theme="dark"] .contact-card h3{color:var(--gold-2)}
-    .feature-card p{font-size:13px;color:var(--muted)}
-
-    .industries{background:var(--navy);color:#fff}
-    [data-theme="dark"] .industries{background:#111}
-    .industries .section-head h2,.industries .section-head p{color:#fff}
-    .industry-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-    .industry-card{padding:28px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);box-shadow:none}
-    .industry-card h3{font-family:'Playfair Display',serif;color:#fff;font-size:24px;margin:18px 0 12px}
-    .industry-card p{color:rgba(255,255,255,.65);font-size:14px}
-    .industry-card .count{margin-top:18px;color:var(--gold-2);font-size:13px;font-weight:700}
-
-    .steps-grid{align-items:start}
-    .process-list{display:grid;gap:14px}
-    .process-box{padding:22px;background:var(--surface)}
-    .process-box h3{display:flex;align-items:center;gap:12px;color:var(--navy);font-size:18px;margin-bottom:8px}
-    .step-num{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:#fff;font-family:'Playfair Display',serif;font-size:18px;flex-shrink:0}
-    .process-box p{color:var(--muted);font-size:15px}
-    .process-visual{background:linear-gradient(135deg,var(--navy),var(--navy-2));color:#fff;border-radius:28px;padding:32px;min-height:100%;box-shadow:var(--shadow-lg)}
-    .process-visual h3{font-family:'Playfair Display',serif;font-size:34px;margin-bottom:14px}
-    .process-visual p{color:rgba(255,255,255,.75)}
-    .process-points{display:grid;gap:12px;margin-top:18px}
-    .process-points li{list-style:none;display:flex;gap:12px;color:rgba(255,255,255,.86)}
-
-    .jobs-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:28px}
-    .jobs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .job-card{padding:26px;display:flex;flex-direction:column;gap:16px}
-    .chip{display:inline-flex;align-items:center;padding:6px 12px;border-radius:999px;background:rgba(201,146,42,.12);color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;width:max-content}
-    .job-card h3{font-family:'Playfair Display',serif;font-size:26px;color:var(--navy);line-height:1.15}
-    .job-company{color:var(--muted);font-size:14px}
-    .meta-row{display:flex;flex-wrap:wrap;gap:10px}
-    .meta{padding:7px 11px;border-radius:12px;background:var(--surface-2);font-size:13px;color:var(--muted)}
-    .salary{font-size:14px;color:var(--muted)}
-    .salary strong{color:var(--navy);font-size:16px}
-    [data-theme="dark"] .salary strong{color:var(--gold-2)}
-    .job-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:auto}
-    .apply-btn{border:none;background:var(--navy);color:#fff;border-radius:999px;padding:13px 18px;font-weight:700}
-    .apply-btn:hover{background:var(--gold)}
-
-    .stories{background:var(--navy);color:#fff}
-    [data-theme="dark"] .stories{background:#101010}
-    .stories .section-head h2,.stories .section-head p{color:#fff}
-    .story-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .story-card{padding:28px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);box-shadow:none}
-    .stars{color:var(--gold-2);letter-spacing:.18em;font-size:18px;margin-bottom:14px}
-    .quote{font-family:'Playfair Display',serif;font-size:24px;line-height:1.5;color:#fff}
-    .author{margin-top:18px;color:rgba(255,255,255,.72);font-size:14px}
-
-    .country-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
-    .country-card{padding:24px;text-align:center}
-    .country-card .flag{font-size:40px;margin-bottom:10px}
-    .country-card h3{font-size:16px;color:var(--navy)}
-    [data-theme="dark"] .country-card h3{color:var(--gold-2)}
-    .country-card p{font-size:13px;color:var(--muted)}
-
-    .register{background:linear-gradient(180deg,var(--surface),var(--surface-2))}
-    .register-grid{align-items:start}
-    .register-info{display:grid;gap:16px}
-    .contact-card,.process-box{padding:22px}
-    .contact-card h3{font-size:17px;color:var(--navy);margin-bottom:6px}
-    .contact-card p{font-size:14px;color:var(--muted)}
-    .register-form{padding:30px;box-shadow:var(--shadow-md)}
-    .register-form h3{font-family:'Playfair Display',serif;font-size:30px;color:var(--navy)}
-    .register-form .sub{font-size:14px;color:var(--muted);margin:8px 0 22px}
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-    .field.full{grid-column:1 / -1}
-    label{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);margin-bottom:8px}
-    [data-theme="dark"] label,[data-theme="dark"] .register-form h3{color:var(--gold-2)}
-    input,select,textarea{width:100%;padding:14px 16px;border-radius:14px;border:1.5px solid var(--line);background:var(--bg);outline:none}
-    input:focus,select:focus,textarea:focus{border-color:var(--navy);box-shadow:0 0 0 4px rgba(13,33,64,.08);background:var(--surface)}
-    textarea{min-height:120px;resize:vertical}
-    .helper{font-size:12px;color:var(--muted);margin-top:6px}
-    .fee{display:flex;gap:12px;padding:16px 18px;border-radius:16px;background:#fff6df;border:1px solid #ecd08b;margin-top:18px}
-    [data-theme="dark"] .fee{background:#2b2415;border-color:#4a3b17}
-    .fee p{font-size:13px;color:#705400}
-    [data-theme="dark"] .fee p{color:#f1cf8d}
-    .agree{display:flex;gap:10px;align-items:flex-start;margin:18px 0 22px}
-    .agree input{width:18px;height:18px;accent-color:var(--navy);margin-top:2px}
-    .agree label{margin:0;text-transform:none;letter-spacing:0;font-weight:500;font-size:13px;color:var(--muted)}
-    .submit-row{display:flex;gap:12px;flex-wrap:wrap}
-    .submit-btn{flex:1;min-width:240px;border:none;background:var(--navy);color:#fff;border-radius:16px;padding:18px 22px;font-weight:700;min-height:56px}
-    .submit-btn:hover{background:var(--gold)}
-    .wa-btn{background:#25D366;color:#fff;border:none;border-radius:16px;padding:18px 22px;font-weight:700;min-height:56px}
-    .status{margin-top:14px;min-height:22px;font-size:14px;color:var(--muted)}
-    .error{color:var(--danger)}
-    .ok{color:var(--success)}
-
-    .contact-grid{align-items:stretch}
-    .contact-panel{background:linear-gradient(135deg,var(--navy),var(--navy-2));padding:32px;border-radius:30px;color:#fff;box-shadow:var(--shadow-lg)}
-    .contact-panel h3{font-family:'Playfair Display',serif;font-size:34px;margin-bottom:12px}
-    .contact-panel p{color:rgba(255,255,255,.76)}
-    .contact-list{display:grid;gap:14px;margin-top:18px}
-    .contact-list li{list-style:none;display:flex;justify-content:space-between;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12)}
-    .contact-list li:last-child{border-bottom:none}
-    .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px}
-
-    footer{background:var(--navy);color:rgba(255,255,255,.6);padding:56px 0 28px}
-    [data-theme="dark"] footer{background:#0f0f0f}
-    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:26px;margin-bottom:28px}
-    .footer-brand .brand-text{color:#fff}
-    .footer-brand p{margin-top:14px;max-width:42ch;font-size:14px;line-height:1.8}
-    .footer-col h4{font-size:14px;color:#fff;margin-bottom:14px}
-    .footer-col a{display:block;color:rgba(255,255,255,.56);font-size:13px;margin-bottom:10px}
-    .footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:20px;font-size:13px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-
-    .modal{position:fixed;inset:0;background:rgba(6,11,20,.72);display:none;align-items:center;justify-content:center;padding:20px;z-index:500}
-    .modal.open{display:flex}
-    .modal-card{width:min(980px,100%);background:var(--surface);border-radius:30px;overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid var(--line)}
-    .modal-head{display:flex;justify-content:space-between;align-items:center;padding:22px 24px;border-bottom:1px solid var(--line)}
-    .modal-head h3{font-family:'Playfair Display',serif;color:var(--navy);font-size:30px}
-    [data-theme="dark"] .modal-head h3{color:var(--gold-2)}
-    .close-btn{width:42px;height:42px;border-radius:50%;border:none;background:var(--surface-2);font-size:24px}
-    .modal-body{padding:24px;display:grid;grid-template-columns:1.05fr .95fr;gap:22px}
-    .pay-box,.summary-box{padding:22px}
-    .amount{font-family:'Playfair Display',serif;font-size:46px;line-height:1;color:var(--navy);margin-top:8px}
-    [data-theme="dark"] .amount{color:var(--gold-2)}
-    .pay-box p{color:var(--muted);margin-top:10px}
-    .pay-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-    .pay-primary,.pay-secondary{padding:14px 18px;border-radius:14px;font-weight:700;min-height:48px;border:none}
-    .pay-primary{background:var(--navy);color:#fff}
-    .pay-secondary{background:var(--surface-2);color:var(--navy)}
-    .pay-confirm{margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
-    .pay-confirm .pay-primary{width:100%}
-    .qr-shell{display:grid;place-items:center;padding:18px;border-radius:20px;background:var(--surface-2);border:1px solid var(--line)}
-    #qrCode{width:220px;height:220px;display:grid;place-items:center;background:#fff;padding:10px;border-radius:16px}
-    .tiny{font-size:12px;color:var(--muted);margin-top:10px;text-align:center}
-    .summary-box dl{display:grid;grid-template-columns:120px 1fr;gap:10px 12px;font-size:14px}
-    .summary-box dt{color:var(--muted)}
-    .summary-box dd{font-weight:700;word-break:break-word}
-    .success-screen{display:none;padding:34px 24px 30px;text-align:center}
-    .success-screen.show{display:block}
-    .tick{width:88px;height:88px;border-radius:50%;display:grid;place-items:center;background:#e7f5ed;color:var(--success);font-size:38px;margin:0 auto 18px}
-    .success-screen h4{font-family:'Playfair Display',serif;font-size:36px;color:var(--navy)}
-    [data-theme="dark"] .success-screen h4{color:var(--gold-2)}
-    .success-screen p{max-width:58ch;margin:12px auto 0;color:var(--muted)}
-    .success-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:22px}
-
-    @media (max-width: 1080px){
-      .industry-grid,.jobs-grid,.story-grid{grid-template-columns:repeat(2,1fr)}
-      .country-grid{grid-template-columns:repeat(3,1fr)}
-      .footer-grid{grid-template-columns:1fr 1fr}
+    body{
+      font-family:Arial, sans-serif;
+      background:linear-gradient(180deg,#f6f7fb,#eef2ff);
+      color:#1f2937;
+      line-height:1.5;
     }
+    .container{width:min(1100px,92%);margin:auto}
+    header{background:#0f172a;color:#fff;padding:16px 0;position:sticky;top:0;z-index:50}
+    .nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+    .brand{font-size:24px;font-weight:700}
+    .btn{display:inline-block;padding:12px 18px;border:none;border-radius:12px;text-decoration:none;font-weight:700;cursor:pointer}
+    .btn-primary{background:#2563eb;color:#fff}
+    .btn-green{background:#22c55e;color:#fff}
+    .btn-dark{background:#111827;color:#fff}
+    .btn-gray{background:#6b7280;color:#fff}
+    .hero{padding:70px 0 40px;display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+    .hero h1{font-size:clamp(32px,5vw,58px);line-height:1.05;margin-bottom:14px;color:#0f172a}
+    .hero p{color:#475569;font-size:18px;max-width:60ch;margin-bottom:24px}
+    .card{background:#fff;border-radius:24px;box-shadow:0 20px 40px rgba(15,23,42,.12);border:1px solid #e5e7eb}
+    .hero-card{padding:28px}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+    .stat{background:#eff6ff;padding:14px;border-radius:16px;text-align:center}
+    .stat strong{display:block;font-size:24px;color:#1d4ed8}
+    .section{padding:30px 0 70px}
+    .section h2{font-size:32px;margin-bottom:16px;color:#0f172a}
+    .form-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+    form{padding:24px}
+    label{display:block;font-size:13px;font-weight:700;margin:12px 0 6px}
+    input, select, textarea{width:100%;padding:13px 14px;border:1px solid #cbd5e1;border-radius:12px;outline:none;font-size:15px;background:#fff}
+    textarea{min-height:110px;resize:vertical}
+    input:focus, select:focus, textarea:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+    .full{grid-column:1 / -1}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .pay-locked{background:#f3f4f6!important;border-color:#d1d5db!important;color:#6b7280!important;cursor:not-allowed!important}
+    .pay-locked:hover{background:#f3f4f6!important}
+    .note{margin-top:14px;font-size:13px;color:#64748b}
+    .payment-box{padding:24px;position:sticky;top:92px}
+    .amount{font-size:44px;font-weight:800;color:#0f172a;margin:10px 0 8px}
+    #qrCode{width:220px;height:220px;margin:18px auto 0;padding:12px;background:#fff;border-radius:18px;border:1px solid #e5e7eb;display:grid;place-items:center}
+    .small{font-size:13px;color:#64748b}
+    .modal{display:none;position:fixed;inset:0;background:rgba(15,23,42,.7);align-items:center;justify-content:center;padding:18px;z-index:100}
+    .modal.open{display:flex}
+    .modal-card{width:min(560px,100%);background:#fff;border-radius:24px;padding:26px;text-align:center}
+    .success{display:none}
+    .success.show{display:block}
+    .close{margin-top:12px;background:#e2e8f0;color:#0f172a}
+    .status{margin-top:12px;font-size:14px;font-weight:600}
+    .status.ok{color:#059669}
+    .status.error{color:#dc2626}
+    footer{padding:26px 0 40px;color:#64748b;text-align:center}
     @media (max-width: 920px){
-      .hero-grid,.about-grid,.steps-grid,.register-grid,.contact-grid,.modal-body{grid-template-columns:1fr}
-      .hero{min-height:auto}
-      .hero-grid{padding-top:90px}
-      .form-grid{grid-template-columns:1fr}
-      .field.full{grid-column:auto}
-      .nav-links a:not(.cta-btn){display:none}
-      .hero-stats{grid-template-columns:1fr}
+      .hero,.form-wrap{grid-template-columns:1fr}
+      .payment-box{position:static}
     }
     @media (max-width: 640px){
-      .container{width:min(100% - 24px,1180px)}
-      .industry-grid,.jobs-grid,.story-grid,.country-grid,.footer-grid{grid-template-columns:1fr}
-      .feature-grid{grid-template-columns:1fr}
-      .jobs-head{flex-direction:column;align-items:start}
-      .submit-row{flex-direction:column}
-      .submit-btn,.wa-btn{width:100%}
+      .stats{grid-template-columns:1fr}
+      .actions{flex-direction:column}
+      .btn{width:100%;text-align:center}
+      .amount{font-size:36px}
     }
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-
   <header>
     <div class="container nav">
-      <a class="brand" href="#hero" aria-label="Primesjobs home">
-        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M12 50V14h22c10 0 18 5 18 15s-8 15-18 15H25" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M25 31h12" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
-        </svg>
-        <div class="brand-text">Primes<span>jobs</span></div>
-      </a>
-      <nav class="nav-links" aria-label="Primary navigation">
-        <a href="#about">About</a>
-        <a href="#industries">Industries</a>
-        <a href="#jobs">Jobs</a>
-        <a href="#countries">Countries</a>
-        <a href="#contact">Contact</a>
-        <button class="theme-btn" type="button" id="themeBtn" aria-label="Toggle light and dark mode">◐</button>
-        <a class="cta-btn" href="#register">Register now</a>
-      </nav>
+      <div class="brand">Primesjobs Demo</div>
+      <a class="btn btn-green" href="#register">Apply Now</a>
     </div>
   </header>
 
-  <main id="main">
-    <section class="hero" id="hero">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <div class="eyebrow">Now hiring across 8 countries</div>
-          <h1>Your career,<br><em>global scale.</em></h1>
-          <p>Primesjobs connects skilled professionals to international employers across Healthcare, Pharmaceutical, Engineering and Oil & Gas. This full website includes WhatsApp lead capture, UPI payment flow, QR code support and a post-payment success screen inspired by high-converting recruitment landing page patterns that prioritize clear CTAs and structured candidate journeys.</p>
-          <div class="hero-actions">
-            <a class="btn-main" href="#register">Apply now</a>
-            <a class="btn-ghost" href="#jobs">Browse openings</a>
-          </div>
+  <main class="container">
+    <section class="hero">
+      <div>
+        <h1>Pay first, submit after</h1>
+        <p>
+          Form details dalo, phir payment karo, payment complete hone ke baad WhatsApp submit hoga.
+          UPI ID: <strong>dollor1@axl</strong>
+        </p>
+        <div class="stats">
+          <div class="stat"><strong>Pay first</strong><span>₹8,000</span></div>
+          <div class="stat"><strong>Then submit</strong><span>WhatsApp</span></div>
+          <div class="stat"><strong>Mobile ready</strong><span>All devices</span></div>
         </div>
-        <aside class="hero-panel" aria-label="Overview panel">
-          <div class="eyebrow" style="margin-bottom:14px;">Candidate journey</div>
-          <ul class="trust-list">
-            <li><span>✅</span><span>Submit details through the on-page registration form.</span></li>
-            <li><span>✅</span><span>Candidate data opens instantly in WhatsApp using a pre-filled click-to-chat format.</span></li>
-            <li><span>✅</span><span>Payment modal shows both UPI app deep link and QR code for scan-and-pay.</span></li>
-            <li><span>✅</span><span>Success screen confirms payment step and next recruiter follow-up.</span></li>
-          </ul>
-          <div class="hero-stats">
-            <div class="hero-stat"><strong>1000+</strong><span>Candidates placed</span></div>
-            <div class="hero-stat"><strong>40+</strong><span>Hiring partners</span></div>
-            <div class="hero-stat"><strong>8</strong><span>Countries served</span></div>
-          </div>
-        </aside>
+      </div>
+
+      <div class="card hero-card">
+        <span class="badge">Payment first</span>
+        <h2>UPI Flow</h2>
+        <p class="small">1. Form fill → 2. Pay → 3. WhatsApp submit</p>
+        <div id="qrCode"></div>
       </div>
     </section>
 
-    <section class="partners" aria-label="Partner companies">
-      <div class="ticker">
-        <div class="ticker-item"><span class="dot"></span>Saudi Aramco</div>
-        <div class="ticker-item"><span class="dot"></span>ADNOC</div>
-        <div class="ticker-item"><span class="dot"></span>Julphar</div>
-        <div class="ticker-item"><span class="dot"></span>Neopharma</div>
-        <div class="ticker-item"><span class="dot"></span>Tata Projects</div>
-        <div class="ticker-item"><span class="dot"></span>HCC</div>
-        <div class="ticker-item"><span class="dot"></span>Larsen & Toubro</div>
-        <div class="ticker-item"><span class="dot"></span>Piramal</div>
-        <div class="ticker-item"><span class="dot"></span>Saudi Aramco</div>
-        <div class="ticker-item"><span class="dot"></span>ADNOC</div>
-        <div class="ticker-item"><span class="dot"></span>Julphar</div>
-        <div class="ticker-item"><span class="dot"></span>Neopharma</div>
-        <div class="ticker-item"><span class="dot"></span>Tata Projects</div>
-        <div class="ticker-item"><span class="dot"></span>HCC</div>
-        <div class="ticker-item"><span class="dot"></span>Larsen & Toubro</div>
-        <div class="ticker-item"><span class="dot"></span>Piramal</div>
-      </div>
-    </section>
+    <section class="section" id="register">
+      <h2>Candidate registration</h2>
+      <div class="form-wrap">
+        <form class="card" id="candidateForm">
+          <label>Full Name</label>
+          <input type="text" id="name" required placeholder="Enter your name">
 
-    <section class="section" id="about">
-      <div class="container about-grid">
-        <div class="image-card">
-          <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=80" alt="Professional team in a global office" width="1200" height="1500" loading="lazy" />
-          <div class="floating-badge"><strong>1000+</strong><span>successful placements</span></div>
-        </div>
-        <div class="about-copy">
-          <div class="section-head">
-            <div class="eyebrow">Who we are</div>
-            <h2>India’s premium global recruitment partner</h2>
-            <p>Strong recruitment sites usually separate key services, show social proof, make the job search easy, and keep contact pathways obvious. This version combines those elements into a focused overseas-career landing page for job seekers in India and the GCC market.</p>
+          <label>Mobile Number</label>
+          <input type="tel" id="phone" required placeholder="10 digit number">
+
+          <label>Email</label>
+          <input type="email" id="email" required placeholder="name@email.com">
+
+          <label>Experience</label>
+          <input type="text" id="experience" required placeholder="e.g. 6 years">
+
+          <label>Applied For</label>
+          <select id="jobRole" required>
+            <option value="">Select role</option>
+            <option>Production Head</option>
+            <option>Project Manager</option>
+            <option>HSSE Engineer</option>
+          </select>
+
+          <label>Preferred Country</label>
+          <select id="country" required>
+            <option value="">Select country</option>
+            <option>UAE</option>
+            <option>Singapore</option>
+            <option>Saudi Arabia</option>
+          </select>
+
+          <label>Passport Status</label>
+          <select id="passport" required>
+            <option value="">Select status</option>
+            <option>Valid passport</option>
+            <option>Applied / in process</option>
+            <option>No passport yet</option>
+          </select>
+
+          <label>Notes</label>
+          <textarea id="notes" placeholder="Current company, notice period, expected salary..."></textarea>
+
+          <div class="actions">
+            <button class="btn btn-green pay-locked" type="button" id="payBtn" disabled>
+              Pay ₹8,000 first → dollor1@axl
+            </button>
+            <button class="btn btn-gray pay-locked" type="submit" id="submitBtn" disabled>
+              Submit after payment ✓
+            </button>
           </div>
-          <p>We specialize in candidate-first placement across Healthcare, Pharmaceutical manufacturing, Engineering, Construction, and Oil & Gas. The website keeps the message direct and the path simple: discover openings, understand the process, register, pay when required, and stay connected over WhatsApp.</p>
-          <div class="feature-grid">
-            <div class="feature-card"><h3>Targeted matching</h3><p>Role-based screening against live job briefs from partner employers.</p></div>
-            <div class="feature-card"><h3>Transparent process</h3><p>Clear candidate steps, fee explanation and visible next actions.</p></div>
-            <div class="feature-card"><h3>Visa assistance</h3><p>Support through documentation, onboarding and overseas joining coordination.</p></div>
-            <div class="feature-card"><h3>WhatsApp-first support</h3><p>Fast candidate communication from lead capture to interview scheduling.</p></div>
+          <p class="note" id="status"></p>
+        </form>
+
+        <div class="card payment-box">
+          <span class="badge">Payment first</span>
+          <h2>UPI Payment</h2>
+          <div class="amount">₹8,000</div>
+          <p class="small">
+            Form details dalo, phir payment karo. 
+            Payment complete karne ke baad submit button unlock hoga.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" id="upiPayBtn" href="#" target="_blank">Pay with UPI</a>
+            <button class="btn btn-dark" id="copyLinkBtn" type="button">Copy UPI Link</button>
+            <button class="btn btn-green" id="markPaidBtn" type="button">I have paid</button>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section industries" id="industries">
-      <div class="container">
-        <div class="section-head">
-          <div class="eyebrow">Specialized sectors</div>
-          <h2>Industries we recruit for</h2>
-          <p>Recruitment agency pages convert better when they communicate exactly which audiences they serve and how candidates fit into those hiring pipelines. These sector cards make that specialization easy to scan.</p>
-        </div>
-        <div class="industry-grid">
-          <article class="industry-card"><div style="font-size:38px">💊</div><h3>Pharma & Healthcare</h3><p>QA, QC, Production, Regulatory Affairs, Clinical and Hospital roles across UAE, Saudi Arabia and India.</p><div class="count">280+ placements</div></article>
-          <article class="industry-card"><div style="font-size:38px">⚙️</div><h3>Engineering</h3><p>Civil, Structural, MEP, Project and Site Management for infrastructure and industrial builds.</p><div class="count">340+ placements</div></article>
-          <article class="industry-card"><div style="font-size:38px">🛢️</div><h3>Oil, Gas & Energy</h3><p>HSSE, upstream, downstream, operations and maintenance roles with leading operators.</p><div class="count">210+ placements</div></article>
-          <article class="industry-card"><div style="font-size:38px">📊</div><h3>Finance & Operations</h3><p>Commercial, procurement, supply chain and leadership support for global employers.</p><div class="count">180+ placements</div></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="process">
-      <div class="container steps-grid">
-        <div>
-          <div class="section-head">
-            <div class="eyebrow">Simple process</div>
-            <h2>Get hired in 4 clear steps</h2>
-            <p>Modern staffing websites work best when the user can understand the next action in one glance. This process section keeps the candidate journey short and easy to trust.</p>
+          <div class="note">
+            UPI ID: <strong>dollor1@axl</strong>
           </div>
-          <div class="process-list">
-            <div class="process-box"><h3><span class="step-num">01</span>Register & upload details</h3><p>Fill the quick candidate form with role, experience, country preference and passport status.</p></div>
-            <div class="process-box"><h3><span class="step-num">02</span>Profile review & matching</h3><p>Recruiters review your fit against live opportunities and shortlist relevant roles.</p></div>
-            <div class="process-box"><h3><span class="step-num">03</span>Payment stage</h3><p>When your process reaches the payment point, the website opens UPI payment with deep link and QR together.</p></div>
-            <div class="process-box"><h3><span class="step-num">04</span>Interview, offer & movement</h3><p>We coordinate interviews, selection updates, visa guidance and deployment support.</p></div>
-          </div>
-        </div>
-        <div class="process-visual">
-          <h3>Built for conversion</h3>
-          <p>Recruitment landing page references emphasize visible CTAs, concise benefit blocks, social proof and a form that is easy to start. This page follows that approach while adapting it for overseas placement with payment and WhatsApp follow-up.</p>
-          <ul class="process-points">
-            <li><span>•</span><span>Hero section with one primary candidate action.</span></li>
-            <li><span>•</span><span>Clearly defined employer sectors and current jobs.</span></li>
-            <li><span>•</span><span>Payment UX using both QR and UPI app link.</span></li>
-            <li><span>•</span><span>Post-payment success state for reassurance.</span></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="jobs">
-      <div class="container">
-        <div class="jobs-head">
-          <div class="section-head" style="margin-bottom:0">
-            <div class="eyebrow">Live openings</div>
-            <h2>Current opportunities</h2>
-            <p>Job seekers expect role visibility and a quick path to apply. Each card below can prefill the registration form and start the same WhatsApp-plus-payment flow.</p>
-          </div>
-          <a class="btn-soft" href="#register">Quick apply</a>
-        </div>
-        <div class="jobs-grid">
-          <article class="job-card">
-            <span class="chip">Pharma</span>
-            <h3>Production Head</h3>
-            <div class="job-company">Julphar / Neopharma · Dubai, UAE</div>
-            <div class="meta-row"><span class="meta">📍 Dubai</span><span class="meta">💼 8–12 yrs</span><span class="meta">🏭 Pharma</span></div>
-            <div class="job-actions"><div class="salary"><strong>AED 28,000</strong> / month</div><button class="apply-btn" data-role="Production Head" data-country="UAE">Apply now</button></div>
-          </article>
-          <article class="job-card">
-            <span class="chip">Engineering</span>
-            <h3>Project Manager</h3>
-            <div class="job-company">Tata Projects / HCC · Singapore</div>
-            <div class="meta-row"><span class="meta">📍 Singapore</span><span class="meta">💼 10+ yrs</span><span class="meta">🏗️ Construction</span></div>
-            <div class="job-actions"><div class="salary"><strong>SGD 12,000</strong> / month</div><button class="apply-btn" data-role="Project Manager" data-country="Singapore">Apply now</button></div>
-          </article>
-          <article class="job-card">
-            <span class="chip">Oil & Gas</span>
-            <h3>HSSE Engineer</h3>
-            <div class="job-company">Saudi Aramco · Saudi Arabia</div>
-            <div class="meta-row"><span class="meta">📍 Riyadh</span><span class="meta">💼 5–9 yrs</span><span class="meta">⛽ Oil & Gas</span></div>
-            <div class="job-actions"><div class="salary"><strong>SAR 22,000</strong> / month</div><button class="apply-btn" data-role="HSSE Engineer" data-country="Saudi Arabia">Apply now</button></div>
-          </article>
-          <article class="job-card">
-            <span class="chip">Pharma</span>
-            <h3>QA Manager</h3>
-            <div class="job-company">Neopharma · Abu Dhabi, UAE</div>
-            <div class="meta-row"><span class="meta">📍 Abu Dhabi</span><span class="meta">💼 7–10 yrs</span><span class="meta">🔬 Quality</span></div>
-            <div class="job-actions"><div class="salary"><strong>AED 22,000</strong> / month</div><button class="apply-btn" data-role="QA Manager" data-country="UAE">Apply now</button></div>
-          </article>
-          <article class="job-card">
-            <span class="chip">Engineering</span>
-            <h3>Civil Engineer – Infra</h3>
-            <div class="job-company">L&T Construction · India</div>
-            <div class="meta-row"><span class="meta">📍 Pan India</span><span class="meta">💼 4–8 yrs</span><span class="meta">🏗️ Infra</span></div>
-            <div class="job-actions"><div class="salary"><strong>₹95,000</strong> / month</div><button class="apply-btn" data-role="Civil Engineer" data-country="India">Apply now</button></div>
-          </article>
-          <article class="job-card">
-            <span class="chip">Operations</span>
-            <h3>Supply Chain Lead</h3>
-            <div class="job-company">Regional FMCG Group · Qatar</div>
-            <div class="meta-row"><span class="meta">📍 Doha</span><span class="meta">💼 8+ yrs</span><span class="meta">📦 Operations</span></div>
-            <div class="job-actions"><div class="salary"><strong>QAR 18,000</strong> / month</div><button class="apply-btn" data-role="Supply Chain Lead" data-country="Qatar">Apply now</button></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section stories" id="stories">
-      <div class="container">
-        <div class="section-head">
-          <div class="eyebrow">Candidate stories</div>
-          <h2>Success stories that build trust</h2>
-          <p>High-performing recruitment pages use testimonials and authentic stories to make the promise feel real. These cards help reinforce credibility before form submission.</p>
-        </div>
-        <div class="story-grid">
-          <article class="story-card"><div class="stars">★★★★★</div><p class="quote">“I moved from Hyderabad to Dubai in 45 days with interview coordination and documentation support handled smoothly.”</p><div class="author">Rakesh Verma · Production Manager · UAE</div></article>
-          <article class="story-card"><div class="stars">★★★★★</div><p class="quote">“The process was fast, transparent and professional. WhatsApp updates made every stage easy to track.”</p><div class="author">Sneha Menon · QA Lead · Abu Dhabi</div></article>
-          <article class="story-card"><div class="stars">★★★★★</div><p class="quote">“The recruiter matched my project experience accurately and helped me secure a role in Singapore within weeks.”</p><div class="author">Imran Khan · Project Manager · Singapore</div></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="countries">
-      <div class="container">
-        <div class="section-head">
-          <div class="eyebrow">Hiring locations</div>
-          <h2>Countries we serve</h2>
-          <p>Regional focus matters on staffing websites because candidates want fast clarity on destination markets and role availability.</p>
-        </div>
-        <div class="country-grid">
-          <div class="country-card"><div class="flag">🇦🇪</div><h3>UAE</h3><p>Pharma, healthcare, operations</p></div>
-          <div class="country-card"><div class="flag">🇸🇦</div><h3>Saudi Arabia</h3><p>Oil & gas, industrial hiring</p></div>
-          <div class="country-card"><div class="flag">🇸🇬</div><h3>Singapore</h3><p>Engineering and project roles</p></div>
-          <div class="country-card"><div class="flag">🇶🇦</div><h3>Qatar</h3><p>Commercial and infrastructure roles</p></div>
-          <div class="country-card"><div class="flag">🇮🇳</div><h3>India</h3><p>Domestic and pan-India opportunities</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section register" id="register">
-      <div class="container register-grid">
-        <div class="register-info">
-          <div class="section-head" style="margin-bottom:0">
-            <div class="eyebrow">Register now</div>
-            <h2>Submit your profile and continue to payment</h2>
-            <p>The form below is designed around a clear candidate path: enter details, open WhatsApp with prefilled information, then continue into payment through a UPI intent link and QR code flow.</p>
-          </div>
-          <div class="contact-card"><h3>WhatsApp submission</h3><p>Candidate details are turned into a pre-filled click-to-chat message using the wa.me structure, which is the standard way to open WhatsApp chats without saving the number first.</p></div>
-          <div class="contact-card"><h3>UPI payment options</h3><p>The payment modal supports both scan-and-pay and tap-to-pay behavior, which matches common UPI payment link usage across Indian mobile devices.</p></div>
-          <div class="contact-card"><h3>Why this works</h3><p>Clear CTA placement, simplified form structure, strong proof blocks, and visible next actions are all repeatedly recommended in recruitment landing page examples and agency site guidance.</p></div>
-        </div>
-
-        <div class="register-form">
-          <h3>Candidate registration</h3>
-          <p class="sub">Fill the form below. On submit, WhatsApp opens with your data and the payment modal appears.</p>
-          <form id="candidateForm" novalidate>
-            <div class="form-grid">
-              <div class="field"><label for="name">Full name</label><input id="name" name="name" type="text" required placeholder="Enter your full name"></div>
-              <div class="field"><label for="phone">Mobile number</label><input id="phone" name="phone" type="tel" required pattern="[0-9]{10}" placeholder="10 digit mobile number"></div>
-              <div class="field"><label for="email">Email address</label><input id="email" name="email" type="email" required placeholder="name@email.com"></div>
-              <div class="field"><label for="experience">Experience</label><input id="experience" name="experience" type="text" required placeholder="e.g. 6 years"></div>
-              <div class="field"><label for="jobRole">Applied for</label>
-                <select id="jobRole" name="jobRole" required>
-                  <option value="">Select role</option>
-                  <option>Production Head</option>
-                  <option>Project Manager</option>
-                  <option>HSSE Engineer</option>
-                  <option>QA Manager</option>
-                  <option>Civil Engineer</option>
-                  <option>Supply Chain Lead</option>
-                </select>
-              </div>
-              <div class="field"><label for="country">Preferred country</label>
-                <select id="country" name="country" required>
-                  <option value="">Select country</option>
-                  <option>UAE</option>
-                  <option>Saudi Arabia</option>
-                  <option>Singapore</option>
-                  <option>Qatar</option>
-                  <option>India</option>
-                </select>
-              </div>
-              <div class="field"><label for="passport">Passport status</label>
-                <select id="passport" name="passport" required>
-                  <option value="">Select status</option>
-                  <option>Valid passport</option>
-                  <option>Applied / in process</option>
-                  <option>No passport yet</option>
-                </select>
-              </div>
-              <div class="field"><label for="resume">Resume file name</label><input id="resume" name="resume" type="text" placeholder="resume.pdf"><div class="helper">For standalone HTML demo, this is a text field.</div></div>
-              <div class="field full"><label for="notes">Additional notes</label><textarea id="notes" name="notes" placeholder="Current company, notice period, expected salary, preferred interview time..."></textarea></div>
-            </div>
-            <div class="fee"><div>ℹ️</div><p><strong>Payment flow included:</strong> after a valid submit, this demo website opens WhatsApp, then shows a modal with a UPI deep link and a QR code together. The UPI flow follows the common intent-based pattern used by payment providers for launching UPI apps.</p></div>
-            <div class="agree"><input id="agree" name="agree" type="checkbox" required><label for="agree">I confirm my information is correct and I agree to be contacted by phone and WhatsApp.</label></div>
-            <div class="submit-row">
-              <button class="submit-btn" id="submitBtn" type="submit">Send details on WhatsApp & continue</button>
-              <a class="wa-btn" href="https://wa.me/919999999999" target="_blank" rel="noopener noreferrer">Direct WhatsApp</a>
-            </div>
-            <div class="status" id="formStatus" aria-live="polite"></div>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="contact">
-      <div class="container contact-grid">
-        <div class="contact-panel">
-          <h3>Speak with our recruiters</h3>
-          <p>Good agency websites keep contact routes obvious and easy, especially for candidates who want fast clarification before they apply.</p>
-          <ul class="contact-list">
-            <li><span>WhatsApp</span><strong>+91 99999 99999</strong></li>
-            <li><span>Email</span><strong>careers@primesjobs.com</strong></li>
-            <li><span>Office</span><strong>New Delhi, India</strong></li>
-            <li><span>Support hours</span><strong>Mon–Sat · 10 AM to 7 PM</strong></li>
-          </ul>
-          <div class="cta-row">
-            <a class="btn-main" href="#register">Start registration</a>
-            <a class="btn-ghost" href="https://wa.me/919999999999" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
-          </div>
-        </div>
-        <div class="register-info">
-          <div class="contact-card"><h3>For employers</h3><p>Separate candidate and employer pathways are commonly recommended on staffing websites, so this section can later be expanded into a dedicated employer inquiry flow.</p></div>
-          <div class="contact-card"><h3>For candidates</h3><p>Use the registration form for the fastest response. The WhatsApp-based follow-up keeps communication friction low after submission.</p></div>
-          <div class="contact-card"><h3>For deployment support</h3><p>After selection, the same website can be extended to include document checklist, visa timeline, and onboarding status modules.</p></div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <div class="brand" style="margin-bottom:10px"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 50V14h22c10 0 18 5 18 15s-8 15-18 15H25" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M25 31h12" stroke="currentColor" stroke-width="6" stroke-linecap="round"/></svg><div class="brand-text">Primes<span>jobs</span></div></div>
-          <p>International recruitment website with WhatsApp candidate capture, UPI payment support, QR code checkout and post-payment confirmation built into one standalone HTML file.</p>
-        </div>
-        <div class="footer-col"><h4>Company</h4><a href="#about">About</a><a href="#industries">Industries</a><a href="#stories">Stories</a></div>
-        <div class="footer-col"><h4>Candidate</h4><a href="#jobs">Jobs</a><a href="#process">Process</a><a href="#register">Register</a></div>
-        <div class="footer-col"><h4>Contact</h4><a href="#contact">Recruiters</a><a href="https://wa.me/919999999999" target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="mailto:careers@primesjobs.com">Email</a></div>
-      </div>
-      <div class="footer-bottom"><span>© 2026 Primesjobs. All rights reserved.</span><span>Built as a premium recruitment landing page demo.</span></div>
-    </div>
-  </footer>
-
-  <div class="modal" id="paymentModal" aria-hidden="true" role="dialog" aria-labelledby="paymentTitle">
+  <div class="modal" id="successModal">
     <div class="modal-card">
-      <div id="paymentContent">
-        <div class="modal-head">
-          <h3 id="paymentTitle">Complete your payment</h3>
-          <button class="close-btn" id="closeModal" type="button" aria-label="Close payment dialog">×</button>
-        </div>
-        <div class="modal-body">
-          <div class="pay-box">
-            <div class="eyebrow">Registration fee</div>
-            <div class="amount">₹8,000</div>
-            <p>The same UPI intent is used for the QR and the app deep link, so candidates can either scan or tap based on device and preference.</p>
-            <div class="pay-actions">
-              <a class="pay-primary" id="upiLinkBtn" href="#" target="_blank" rel="noopener noreferrer">Pay with UPI app</a>
-              <button class="pay-secondary" id="copyUpiBtn" type="button">Copy UPI link</button>
-            </div>
-            <div class="pay-confirm"><button class="pay-primary" id="markPaidBtn" type="button">I have completed payment</button></div>
-          </div>
-          <div>
-            <div class="qr-shell"><div id="qrCode" aria-label="UPI QR code"></div></div>
-            <div class="tiny">Scan using PhonePe, Google Pay, Paytm, BHIM, or any UPI-enabled app.</div>
-            <div class="summary-box" style="margin-top:16px">
-              <dl>
-                <dt>Candidate</dt><dd id="sumName">—</dd>
-                <dt>Phone</dt><dd id="sumPhone">—</dd>
-                <dt>Role</dt><dd id="sumRole">—</dd>
-                <dt>Country</dt><dd id="sumCountry">—</dd>
-                <dt>UPI ID</dt><dd id="sumUpi">primesjobs@upi</dd>
-              </dl>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="success-screen" id="successScreen">
-        <div class="tick">✓</div>
-        <h4>Payment step completed</h4>
-        <p>Your details have been prepared for WhatsApp and the payment stage is marked complete. The recruiter can now move forward with screening and follow-up.</p>
-        <div class="success-actions">
-          <a class="pay-primary" id="successWhatsAppBtn" href="#" target="_blank" rel="noopener noreferrer">Open WhatsApp again</a>
-          <button class="pay-secondary" id="closeSuccessBtn" type="button">Close</button>
-        </div>
+      <h2>Payment confirmed</h2>
+      <p class="small">Ab aap form submit kar sakte ho. WhatsApp par details jayenge.</p>
+      <div class="actions" style="justify-content:center">
+        <button class="btn btn-green" id="goSubmitBtn">Go to submit</button>
+        <button class="btn close" id="closeModal">Close</button>
       </div>
     </div>
   </div>
 
+  <footer>
+    Demo: Pay first → Form submit → WhatsApp. UPI ID: dollor1@axl
+  </footer>
+
   <script>
-    const whatsappNumber = '919999999999';
-    const upiId = 'primesjobs@upi';
-    const payeeName = 'Primesjobs';
-    const amount = '8000.00';
-    const currency = 'INR';
-    const transactionNote = 'Candidate Registration Fee';
+    const upiId = "dollor1@axl";
+    const payeeName = "Primesjobs";
+    const amount = "8000.00";
+    const whatsappNumber = "919999999999";
 
-    const html = document.documentElement;
-    const themeBtn = document.getElementById('themeBtn');
-    const form = document.getElementById('candidateForm');
-    const statusBox = document.getElementById('formStatus');
-    const modal = document.getElementById('paymentModal');
-    const paymentContent = document.getElementById('paymentContent');
-    const successScreen = document.getElementById('successScreen');
-    const upiLinkBtn = document.getElementById('upiLinkBtn');
-    const copyUpiBtn = document.getElementById('copyUpiBtn');
-    const markPaidBtn = document.getElementById('markPaidBtn');
-    const closeModal = document.getElementById('closeModal');
-    const closeSuccessBtn = document.getElementById('closeSuccessBtn');
-    const successWhatsAppBtn = document.getElementById('successWhatsAppBtn');
-    const applyBtns = document.querySelectorAll('.apply-btn');
-
-    let lastWhatsAppLink = '#';
-    let lastUpiLink = '#';
-
-    themeBtn.addEventListener('click', () => {
-      html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark';
+    const qrText = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=INR&tn=Registration%20Fee`;
+    new QRCode(document.getElementById("qrCode"), {
+      text: qrText,
+      width: 180,
+      height: 180
     });
 
-    function setStatus(message, kind='') {
-      statusBox.textContent = message;
-      statusBox.className = 'status' + (kind ? ' ' + kind : '');
+    const form = document.getElementById("candidateForm");
+    const payBtn = document.getElementById("payBtn");
+    const submitBtn = document.getElementById("submitBtn");
+    const upiPayBtn = document.getElementById("upiPayBtn");
+    const copyLinkBtn = document.getElementById("copyLinkBtn");
+    const markPaidBtn = document.getElementById("markPaidBtn");
+    const status = document.getElementById("status");
+    const successModal = document.getElementById("successModal");
+
+    let paymentConfirmed = false;
+    let formData = {};
+    let whatsappLink = "";
+
+    function updateStatus(msg, type="") {
+      status.textContent = msg;
+      status.className = type ? `status ${type}` : "";
     }
 
-    function buildWhatsAppMessage(data) {
-      return [
-        'New Candidate Registration',
-        '',
-        'Name: ' + data.name,
-        'Phone: ' + data.phone,
-        'Email: ' + data.email,
-        'Experience: ' + data.experience,
-        'Applied For: ' + data.jobRole,
-        'Preferred Country: ' + data.country,
-        'Passport: ' + data.passport,
-        'Resume: ' + (data.resume || 'Not specified'),
-        'Notes: ' + (data.notes || 'None'),
-        '',
-        'Payment Stage: Candidate entered payment flow'
-      ].join('\n');
+    function unlockSubmit() {
+      payBtn.disabled = true;
+      payBtn.classList.add("pay-locked");
+      submitBtn.disabled = false;
+      submitBtn.classList.remove("pay-locked");
+      updateStatus("Payment confirmed! Ab form submit kar sakte ho.", "ok");
     }
 
-    function buildUpiLink(data) {
-      const params = new URLSearchParams({
-        pa: upiId,
-        pn: payeeName,
-        am: amount,
-        cu: currency,
-        tn: transactionNote + ' - ' + data.name
-      });
-      return 'upi://pay?' + params.toString();
+    function buildWhatsAppLink(data) {
+      const message = `
+New Candidate Registration - Payment Complete
+
+Name: ${data.name}
+Phone: ${data.phone}
+Email: ${data.email}
+Experience: ${data.experience}
+Applied For: ${data.jobRole}
+Preferred Country: ${data.country}
+Passport: ${data.passport}
+Notes: ${data.notes || "None"}
+
+Payment: ₹8000 to dollor1@axl ✓
+      `.trim();
+      return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
     }
 
-    function fillSummary(data) {
-      document.getElementById('sumName').textContent = data.name;
-      document.getElementById('sumPhone').textContent = data.phone;
-      document.getElementById('sumRole').textContent = data.jobRole;
-      document.getElementById('sumCountry').textContent = data.country;
-      document.getElementById('sumUpi').textContent = upiId;
-    }
-
-    function renderQr(text) {
-      const qrBox = document.getElementById('qrCode');
-      qrBox.innerHTML = '';
-      new QRCode(qrBox, {
-        text,
-        width: 220,
-        height: 220,
-        colorDark: '#0d2140',
-        colorLight: '#ffffff',
-        correctLevel: QRCode.CorrectLevel.M
-      });
-    }
-
-    function openModal() {
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closePaymentModal() {
-      modal.classList.remove('open');
-      modal.setAttribute('aria-hidden', 'true');
-      paymentContent.style.display = 'block';
-      successScreen.classList.remove('show');
-      document.body.style.overflow = '';
-    }
-
-    applyBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const role = btn.dataset.role;
-        const country = btn.dataset.country;
-        document.getElementById('jobRole').value = role;
-        document.getElementById('country').value = country;
-        document.getElementById('register').scrollIntoView({ behavior: 'smooth' });
-      });
+    // Form validation
+    form.addEventListener("input", function() {
+      const valid = form.checkValidity();
+      payBtn.disabled = !valid;
+      if (valid && !paymentConfirmed) {
+        payBtn.classList.toggle("pay-locked", !valid);
+      }
     });
 
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      setStatus('');
-      if (!form.checkValidity()) {
+    markPaidBtn.addEventListener("click", function() {
+      const valid = form.checkValidity();
+      if (!valid) {
         form.reportValidity();
-        setStatus('Please fill all required fields correctly before continuing.', 'error');
+        return;
+      }
+      
+      formData = {
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        email: document.getElementById("email").value,
+        experience: document.getElementById("experience").value,
+        jobRole: document.getElementById("jobRole").value,
+        country: document.getElementById("country").value,
+        passport: document.getElementById("passport").value,
+        notes: document.getElementById("notes").value
+      };
+
+      whatsappLink = buildWhatsAppLink(formData);
+      upiPayBtn.href = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=INR&tn=${encodeURIComponent("Registration Fee - " + formData.name)}`;
+
+      paymentConfirmed = true;
+      unlockSubmit();
+      successModal.classList.add("open");
+    });
+
+    submitBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      
+      if (!paymentConfirmed) {
+        updateStatus("Pehle payment karo!", "error");
         return;
       }
 
-      const formData = Object.fromEntries(new FormData(form).entries());
-      const message = buildWhatsAppMessage(formData);
-      const waLink = 'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(message);
-      const upiLink = buildUpiLink(formData);
-
-      lastWhatsAppLink = waLink;
-      lastUpiLink = upiLink;
-
-      fillSummary(formData);
-      renderQr(upiLink);
-      upiLinkBtn.href = upiLink;
-      successWhatsAppBtn.href = waLink;
-
-      openModal();
-      window.open(waLink, '_blank', 'noopener');
-      setStatus('WhatsApp opened with your details. Complete the payment in the popup.', 'ok');
+      window.open(whatsappLink, "_blank");
+      updateStatus("WhatsApp khul gaya! Recruiter contact karega.", "ok");
+      
+      // Form reset (optional)
+      form.reset();
+      paymentConfirmed = false;
+      payBtn.disabled = true;
+      payBtn.classList.add("pay-locked");
+      submitBtn.disabled = true;
+      submitBtn.classList.add("pay-locked");
     });
 
-    copyUpiBtn.addEventListener('click', async () => {
+    copyLinkBtn.addEventListener("click", async () => {
+      const link = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=INR&tn=Demo%20Fee`;
       try {
-        await navigator.clipboard.writeText(lastUpiLink);
-        copyUpiBtn.textContent = 'UPI link copied';
-        setTimeout(() => { copyUpiBtn.textContent = 'Copy UPI link'; }, 1600);
+        await navigator.clipboard.writeText(link);
+        copyLinkBtn.textContent = "Copied!";
+        setTimeout(() => copyLinkBtn.textContent = "Copy UPI Link", 1500);
       } catch (e) {
-        alert('Copy failed on this browser.');
+        alert("Copy nahi hua. Browser permission check karo.");
       }
     });
 
-    markPaidBtn.addEventListener('click', () => {
-      paymentContent.style.display = 'none';
-      successScreen.classList.add('show');
+    document.getElementById("goSubmitBtn").addEventListener("click", () => {
+      successModal.classList.remove("open");
     });
 
-    closeModal.addEventListener('click', closePaymentModal);
-    closeSuccessBtn.addEventListener('click', closePaymentModal);
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closePaymentModal();
+    document.querySelectorAll(".close").forEach(btn => {
+      btn.addEventListener("click", () => {
+        successModal.classList.remove("open");
+      });
+    });
+
+    successModal.addEventListener("click", (e) => {
+      if (e.target === successModal) {
+        successModal.classList.remove("open");
+      }
     });
   </script>
 </body>
