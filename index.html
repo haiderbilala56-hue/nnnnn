@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Primesjobs Demo - Pay First</title>
+  <title>Primesjobs Demo</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
@@ -13,59 +13,253 @@
       color:#1f2937;
       line-height:1.5;
     }
-    .container{width:min(1100px,92%);margin:auto}
-    header{background:#0f172a;color:#fff;padding:16px 0;position:sticky;top:0;z-index:50}
-    .nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-    .brand{font-size:24px;font-weight:700}
-    .btn{display:inline-block;padding:12px 18px;border:none;border-radius:12px;text-decoration:none;font-weight:700;cursor:pointer}
-    .btn-primary{background:#2563eb;color:#fff}
-    .btn-green{background:#22c55e;color:#fff}
-    .btn-dark{background:#111827;color:#fff}
-    .btn-gray{background:#6b7280;color:#fff}
-    .hero{padding:70px 0 40px;display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
-    .hero h1{font-size:clamp(32px,5vw,58px);line-height:1.05;margin-bottom:14px;color:#0f172a}
-    .hero p{color:#475569;font-size:18px;max-width:60ch;margin-bottom:24px}
-    .card{background:#fff;border-radius:24px;box-shadow:0 20px 40px rgba(15,23,42,.12);border:1px solid #e5e7eb}
-    .hero-card{padding:28px}
-    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
-    .stat{background:#eff6ff;padding:14px;border-radius:16px;text-align:center}
-    .stat strong{display:block;font-size:24px;color:#1d4ed8}
-    .section{padding:30px 0 70px}
-    .section h2{font-size:32px;margin-bottom:16px;color:#0f172a}
-    .form-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
-    form{padding:24px}
-    label{display:block;font-size:13px;font-weight:700;margin:12px 0 6px}
-    input, select, textarea{width:100%;padding:13px 14px;border:1px solid #cbd5e1;border-radius:12px;outline:none;font-size:15px;background:#fff}
+    .container{
+      width:min(1100px,92%);
+      margin:auto;
+    }
+    header{
+      background:#0f172a;
+      color:#fff;
+      padding:16px 0;
+      position:sticky;
+      top:0;
+      z-index:50;
+    }
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    .brand{
+      font-size:24px;
+      font-weight:700;
+    }
+    .btn{
+      display:inline-block;
+      padding:12px 18px;
+      border:none;
+      border-radius:12px;
+      text-decoration:none;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .btn-primary{
+      background:#2563eb;
+      color:#fff;
+    }
+    .btn-green{
+      background:#22c55e;
+      color:#fff;
+    }
+    .btn-dark{
+      background:#111827;
+      color:#fff;
+    }
+    .hero{
+      padding:70px 0 40px;
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:28px;
+      align-items:center;
+    }
+    .hero h1{
+      font-size:clamp(32px,5vw,58px);
+      line-height:1.05;
+      margin-bottom:14px;
+      color:#0f172a;
+    }
+    .hero p{
+      color:#475569;
+      font-size:18px;
+      max-width:60ch;
+      margin-bottom:24px;
+    }
+    .card{
+      background:#fff;
+      border-radius:24px;
+      box-shadow:0 20px 40px rgba(15,23,42,.12);
+      border:1px solid #e5e7eb;
+    }
+    .hero-card{
+      padding:28px;
+    }
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:20px;
+    }
+    .stat{
+      background:#eff6ff;
+      padding:14px;
+      border-radius:16px;
+      text-align:center;
+    }
+    .stat strong{
+      display:block;
+      font-size:24px;
+      color:#1d4ed8;
+    }
+    .section{
+      padding:30px 0 70px;
+    }
+    .section h2{
+      font-size:32px;
+      margin-bottom:16px;
+      color:#0f172a;
+    }
+    .jobs{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+      margin-top:20px;
+    }
+    .job{
+      padding:22px;
+    }
+    .job h3{
+      margin-bottom:10px;
+      font-size:22px;
+    }
+    .job p{
+      color:#64748b;
+      margin-bottom:8px;
+    }
+    .badge{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:999px;
+      background:#dcfce7;
+      color:#166534;
+      font-size:12px;
+      font-weight:700;
+      margin-bottom:12px;
+    }
+    .form-wrap{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+      align-items:start;
+    }
+    form{
+      padding:24px;
+    }
+    label{
+      display:block;
+      font-size:13px;
+      font-weight:700;
+      margin:12px 0 6px;
+    }
+    input, select, textarea{
+      width:100%;
+      padding:13px 14px;
+      border:1px solid #cbd5e1;
+      border-radius:12px;
+      outline:none;
+      font-size:15px;
+      background:#fff;
+    }
     textarea{min-height:110px;resize:vertical}
-    input:focus, select:focus, textarea:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+    input:focus, select:focus, textarea:focus{
+      border-color:#2563eb;
+      box-shadow:0 0 0 3px rgba(37,99,235,.12);
+    }
     .full{grid-column:1 / -1}
-    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-    .pay-locked{background:#f3f4f6!important;border-color:#d1d5db!important;color:#6b7280!important;cursor:not-allowed!important}
-    .pay-locked:hover{background:#f3f4f6!important}
-    .note{margin-top:14px;font-size:13px;color:#64748b}
-    .payment-box{padding:24px;position:sticky;top:92px}
-    .amount{font-size:44px;font-weight:800;color:#0f172a;margin:10px 0 8px}
-    #qrCode{width:220px;height:220px;margin:18px auto 0;padding:12px;background:#fff;border-radius:18px;border:1px solid #e5e7eb;display:grid;place-items:center}
-    .small{font-size:13px;color:#64748b}
-    .modal{display:none;position:fixed;inset:0;background:rgba(15,23,42,.7);align-items:center;justify-content:center;padding:18px;z-index:100}
+    .actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+    .note{
+      margin-top:14px;
+      font-size:13px;
+      color:#64748b;
+    }
+    .payment-box{
+      padding:24px;
+      position:sticky;
+      top:92px;
+    }
+    .amount{
+      font-size:44px;
+      font-weight:800;
+      color:#0f172a;
+      margin:10px 0 8px;
+    }
+    #qrCode{
+      width:220px;
+      height:220px;
+      margin:18px auto 0;
+      padding:12px;
+      background:#fff;
+      border-radius:18px;
+      border:1px solid #e5e7eb;
+      display:grid;
+      place-items:center;
+    }
+    .small{
+      font-size:13px;
+      color:#64748b;
+    }
+    .modal{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(15,23,42,.7);
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:100;
+    }
     .modal.open{display:flex}
-    .modal-card{width:min(560px,100%);background:#fff;border-radius:24px;padding:26px;text-align:center}
-    .success{display:none}
-    .success.show{display:block}
-    .close{margin-top:12px;background:#e2e8f0;color:#0f172a}
-    .status{margin-top:12px;font-size:14px;font-weight:600}
-    .status.ok{color:#059669}
-    .status.error{color:#dc2626}
-    footer{padding:26px 0 40px;color:#64748b;text-align:center}
+    .modal-card{
+      width:min(560px,100%);
+      background:#fff;
+      border-radius:24px;
+      padding:26px;
+      text-align:center;
+    }
+    .success{
+      display:none;
+    }
+    .success.show{
+      display:block;
+    }
+    .close{
+      margin-top:12px;
+      background:#e2e8f0;
+      color:#0f172a;
+    }
+    footer{
+      padding:26px 0 40px;
+      color:#64748b;
+      text-align:center;
+    }
     @media (max-width: 920px){
-      .hero,.form-wrap{grid-template-columns:1fr}
-      .payment-box{position:static}
+      .hero,.form-wrap,.jobs{
+        grid-template-columns:1fr;
+      }
+      .payment-box{
+        position:static;
+      }
     }
     @media (max-width: 640px){
-      .stats{grid-template-columns:1fr}
-      .actions{flex-direction:column}
-      .btn{width:100%;text-align:center}
-      .amount{font-size:36px}
+      .stats{
+        grid-template-columns:1fr;
+      }
+      .actions{
+        flex-direction:column;
+      }
+      .btn{
+        width:100%;
+        text-align:center;
+      }
+      .amount{
+        font-size:36px;
+      }
     }
   </style>
 </head>
@@ -80,23 +274,54 @@
   <main class="container">
     <section class="hero">
       <div>
-        <h1>Pay first, submit after</h1>
+        <h1>Recruitment demo with UPI payment flow</h1>
         <p>
-          Form details dalo, phir payment karo, payment complete hone ke baad WhatsApp submit hoga.
-          UPI ID: <strong>dollor1@axl</strong>
+          Ye demo website mobile, tablet, Windows, Mac, Android sab par work karega.
+          Form submit karne ke baad WhatsApp open hoga aur payment ke liye UPI link aur QR code dono dikhेंगे.
         </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#register">Start Registration</a>
+          <a class="btn btn-dark" href="https://wa.me/919999999999" target="_blank">WhatsApp</a>
+        </div>
         <div class="stats">
-          <div class="stat"><strong>Pay first</strong><span>₹8,000</span></div>
-          <div class="stat"><strong>Then submit</strong><span>WhatsApp</span></div>
-          <div class="stat"><strong>Mobile ready</strong><span>All devices</span></div>
+          <div class="stat"><strong>1000+</strong><span>Candidates</span></div>
+          <div class="stat"><strong>40+</strong><span>Partners</span></div>
+          <div class="stat"><strong>8</strong><span>Countries</span></div>
         </div>
       </div>
 
       <div class="card hero-card">
-        <span class="badge">Payment first</span>
-        <h2>UPI Flow</h2>
-        <p class="small">1. Form fill → 2. Pay → 3. WhatsApp submit</p>
+        <span class="badge">Demo site</span>
+        <h2>Simple flow</h2>
+        <p class="small">Form → WhatsApp → UPI payment → Success screen</p>
         <div id="qrCode"></div>
+      </div>
+    </section>
+
+    <section class="section" id="jobs">
+      <h2>Live openings</h2>
+      <div class="jobs">
+        <div class="card job">
+          <span class="badge">Pharma</span>
+          <h3>Production Head</h3>
+          <p>Dubai, UAE</p>
+          <p>Salary: AED 28,000</p>
+          <button class="btn btn-primary fill" data-role="Production Head" data-country="UAE">Apply</button>
+        </div>
+        <div class="card job">
+          <span class="badge">Engineering</span>
+          <h3>Project Manager</h3>
+          <p>Singapore</p>
+          <p>Salary: SGD 12,000</p>
+          <button class="btn btn-primary fill" data-role="Project Manager" data-country="Singapore">Apply</button>
+        </div>
+        <div class="card job">
+          <span class="badge">Oil & Gas</span>
+          <h3>HSSE Engineer</h3>
+          <p>Saudi Arabia</p>
+          <p>Salary: SAR 22,000</p>
+          <button class="btn btn-primary fill" data-role="HSSE Engineer" data-country="Saudi Arabia">Apply</button>
+        </div>
       </div>
     </section>
 
@@ -144,59 +369,59 @@
           <textarea id="notes" placeholder="Current company, notice period, expected salary..."></textarea>
 
           <div class="actions">
-            <button class="btn btn-green pay-locked" type="button" id="payBtn" disabled>
-              Pay ₹8,000 first → dollor1@axl
-            </button>
-            <button class="btn btn-gray pay-locked" type="submit" id="submitBtn" disabled>
-              Submit after payment ✓
-            </button>
+            <button class="btn btn-green" type="submit">Send on pay & WhatsApp</button>
+            <a class="btn btn-dark" id="directWa" href="https://wa.me/919911738261" target="_blank">Direct WhatsApp</a>
           </div>
-          <p class="note" id="status"></p>
+          <p class="note">Demo number aur UPI ID ko apne real details se replace karna hoga.</p>
         </form>
 
         <div class="card payment-box">
-          <span class="badge">Payment first</span>
-          <h2>UPI Payment</h2>
+          <span class="badge">Payment</span>
+          <h2>UPI payment</h2>
           <div class="amount">₹8,000</div>
-          <p class="small">
-            Form details dalo, phir payment karo. 
-            Payment complete karne ke baad submit button unlock hoga.
-          </p>
+          <p class="small">UPI app se direct pay ya QR scan karo. Mobile par button tap karte hi UPI app open ho jayegi.</p>
           <div class="actions">
             <a class="btn btn-primary" id="upiPayBtn" href="#" target="_blank">Pay with UPI</a>
             <button class="btn btn-dark" id="copyLinkBtn" type="button">Copy UPI Link</button>
-            <button class="btn btn-green" id="markPaidBtn" type="button">I have paid</button>
           </div>
-          <div class="note">
-            UPI ID: <strong>dollor1@axl</strong>
-          </div>
+          <div class="note">UPI ID: <strong id="upiIdText">primesjobs@upi</strong></div>
         </div>
       </div>
     </section>
   </main>
 
-  <div class="modal" id="successModal">
+  <div class="modal" id="paymentModal">
     <div class="modal-card">
-      <h2>Payment confirmed</h2>
-      <p class="small">Ab aap form submit kar sakte ho. WhatsApp par details jayenge.</p>
-      <div class="actions" style="justify-content:center">
-        <button class="btn btn-green" id="goSubmitBtn">Go to submit</button>
-        <button class="btn close" id="closeModal">Close</button>
+      <div id="paymentView">
+        <h2>Payment completed?</h2>
+        <p class="small">Agar payment kar chuke ho, confirm karo.</p>
+        <div class="actions" style="justify-content:center">
+          <button class="btn btn-green" id="confirmPaid" type="button">I have paid</button>
+          <button class="btn close" id="closeModal" type="button">Close</button>
+        </div>
+      </div>
+      <div class="success" id="successView">
+        <h2>Success</h2>
+        <p class="small">Payment step complete. Recruiter will contact you on WhatsApp.</p>
+        <div class="actions" style="justify-content:center">
+          <a class="btn btn-green" id="whatsappAgain" href="#" target="_blank">Open WhatsApp again</a>
+          <button class="btn close" id="doneClose" type="button">Done</button>
+        </div>
       </div>
     </div>
   </div>
 
   <footer>
-    Demo: Pay first → Form submit → WhatsApp. UPI ID: dollor1@axl
+    Demo website with WhatsApp + UPI payment flow.
   </footer>
 
   <script>
+    const whatsappNumber = "919911738261";
     const upiId = "dollor1@axl";
     const payeeName = "Primesjobs";
     const amount = "8000.00";
-    const whatsappNumber = "919911738261";
 
-    const qrText = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=INR&tn=Registration%20Fee`;
+    const qrText = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=INR&tn=Demo%20Registration%20Fee`;
     new QRCode(document.getElementById("qrCode"), {
       text: qrText,
       width: 180,
@@ -204,34 +429,22 @@
     });
 
     const form = document.getElementById("candidateForm");
-    const payBtn = document.getElementById("payBtn");
-    const submitBtn = document.getElementById("submitBtn");
     const upiPayBtn = document.getElementById("upiPayBtn");
     const copyLinkBtn = document.getElementById("copyLinkBtn");
-    const markPaidBtn = document.getElementById("markPaidBtn");
-    const status = document.getElementById("status");
-    const successModal = document.getElementById("successModal");
+    const modal = document.getElementById("paymentModal");
+    const paymentView = document.getElementById("paymentView");
+    const successView = document.getElementById("successView");
+    const confirmPaid = document.getElementById("confirmPaid");
+    const closeModal = document.getElementById("closeModal");
+    const doneClose = document.getElementById("doneClose");
+    const whatsappAgain = document.getElementById("whatsappAgain");
 
-    let paymentConfirmed = false;
-    let formData = {};
-    let whatsappLink = "";
+    let currentWhatsAppLink = "";
+    let currentUpiLink = qrText;
 
-    function updateStatus(msg, type="") {
-      status.textContent = msg;
-      status.className = type ? `status ${type}` : "";
-    }
-
-    function unlockSubmit() {
-      payBtn.disabled = true;
-      payBtn.classList.add("pay-locked");
-      submitBtn.disabled = false;
-      submitBtn.classList.remove("pay-locked");
-      updateStatus("Payment confirmed! Ab form submit kar sakte ho.", "ok");
-    }
-
-    function buildWhatsAppLink(data) {
+    function buildWhatsAppLink(data){
       const message = `
-New Candidate Registration - Payment Complete
+New Candidate Registration
 
 Name: ${data.name}
 Phone: ${data.phone}
@@ -241,29 +454,20 @@ Applied For: ${data.jobRole}
 Preferred Country: ${data.country}
 Passport: ${data.passport}
 Notes: ${data.notes || "None"}
-
-Payment: ₹8000 to dollor1@axl ✓
+Payment Stage: UPI payment requested
       `.trim();
       return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
     }
 
-    // Form validation
-    form.addEventListener("input", function() {
-      const valid = form.checkValidity();
-      payBtn.disabled = !valid;
-      if (valid && !paymentConfirmed) {
-        payBtn.classList.toggle("pay-locked", !valid);
-      }
-    });
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
 
-    markPaidBtn.addEventListener("click", function() {
-      const valid = form.checkValidity();
-      if (!valid) {
+      if (!form.checkValidity()) {
         form.reportValidity();
         return;
       }
-      
-      formData = {
+
+      const data = {
         name: document.getElementById("name").value,
         phone: document.getElementById("phone").value,
         email: document.getElementById("email").value,
@@ -274,38 +478,21 @@ Payment: ₹8000 to dollor1@axl ✓
         notes: document.getElementById("notes").value
       };
 
-      whatsappLink = buildWhatsAppLink(formData);
-      upiPayBtn.href = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=INR&tn=${encodeURIComponent("Registration Fee - " + formData.name)}`;
+      currentWhatsAppLink = buildWhatsAppLink(data);
+      currentUpiLink = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=INR&tn=${encodeURIComponent("Demo Registration Fee - " + data.name)}`;
 
-      paymentConfirmed = true;
-      unlockSubmit();
-      successModal.classList.add("open");
-    });
+      upiPayBtn.href = currentUpiLink;
+      whatsappAgain.href = currentWhatsAppLink;
 
-    submitBtn.addEventListener("click", function(e) {
-      e.preventDefault();
-      
-      if (!paymentConfirmed) {
-        updateStatus("Pehle payment karo!", "error");
-        return;
-      }
-
-      window.open(whatsappLink, "_blank");
-      updateStatus("WhatsApp khul gaya! Recruiter contact karega.", "ok");
-      
-      // Form reset (optional)
-      form.reset();
-      paymentConfirmed = false;
-      payBtn.disabled = true;
-      payBtn.classList.add("pay-locked");
-      submitBtn.disabled = true;
-      submitBtn.classList.add("pay-locked");
+      window.open(currentWhatsAppLink, "_blank");
+      modal.classList.add("open");
+      paymentView.style.display = "block";
+      successView.classList.remove("show");
     });
 
     copyLinkBtn.addEventListener("click", async () => {
-      const link = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=INR&tn=Demo%20Fee`;
       try {
-        await navigator.clipboard.writeText(link);
+        await navigator.clipboard.writeText(currentUpiLink);
         copyLinkBtn.textContent = "Copied!";
         setTimeout(() => copyLinkBtn.textContent = "Copy UPI Link", 1500);
       } catch (e) {
@@ -313,20 +500,29 @@ Payment: ₹8000 to dollor1@axl ✓
       }
     });
 
-    document.getElementById("goSubmitBtn").addEventListener("click", () => {
-      successModal.classList.remove("open");
-    });
-
-    document.querySelectorAll(".close").forEach(btn => {
+    document.querySelectorAll(".fill").forEach(btn => {
       btn.addEventListener("click", () => {
-        successModal.classList.remove("open");
+        document.getElementById("jobRole").value = btn.dataset.role;
+        document.getElementById("country").value = btn.dataset.country;
+        document.getElementById("register").scrollIntoView({ behavior: "smooth" });
       });
     });
 
-    successModal.addEventListener("click", (e) => {
-      if (e.target === successModal) {
-        successModal.classList.remove("open");
-      }
+    confirmPaid.addEventListener("click", () => {
+      paymentView.style.display = "none";
+      successView.classList.add("show");
+    });
+
+    function closeAll(){
+      modal.classList.remove("open");
+      paymentView.style.display = "block";
+      successView.classList.remove("show");
+    }
+
+    closeModal.addEventListener("click", closeAll);
+    doneClose.addEventListener("click", closeAll);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeAll();
     });
   </script>
 </body>
